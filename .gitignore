@@ -1,0 +1,5 @@
+*.obj
+*.exe
+*.tds
+*.dat 
+EditCF51/settings.dat 
