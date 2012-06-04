@@ -151,7 +151,7 @@ __fastcall TMain::TMain(TComponent* Owner)
   // Load the HTML Help library
   if (!LoadHtmlHelp())
   {
-    ShowMessage("HTML Help was not detected on this computer. EASy68K help may not work correctly.");
+    ShowMessage("HTML Help was not detected on this computer. EASyCF51 help may not work correctly.");
   }
 
   // With dynamic loading it's advised to use HH_INITIALIZE. See the comments
@@ -368,8 +368,8 @@ void __fastcall TMain::mnuDoAssemblerClick(TObject *Sender)
 
       // use path of selected source file as temp working directory
       SetCurrentDir(ExtractFilePath(Active->Project.CurrentFile));
-      sourceFile = ExtractFilePath(Active->Project.CurrentFile) + "EASy68Ks.tmp";
-      tempFile = ExtractFilePath(Active->Project.CurrentFile) + "EASy68Km.tmp";
+      sourceFile = ExtractFilePath(Active->Project.CurrentFile) + "EASyCF51s.tmp";
+      tempFile = ExtractFilePath(Active->Project.CurrentFile) + "EASyCF51m.tmp";
       Active->SourceText->Lines->SaveToFile(sourceFile);
       assembleFile(sourceFile.c_str(), tempFile.c_str(), Active->Project.CurrentFile);
       DeleteFile(sourceFile);              // delete temporary files
@@ -398,9 +398,10 @@ void __fastcall TMain::mnuEditorOptionsClick(TObject *Sender)
 }
 
 //---------------------------------------------------------------------------
-// Prints the text from the active window
+
 void __fastcall TMain::mnuPrintSourceClick(TObject *Sender)
-{
+{/* Prints the text from the active window*/
+
   if(PrintDialog->Execute())
   {
     try //try to print the text
@@ -851,4 +852,6 @@ void __fastcall TMain::Reload1Click(TObject *Sender)
   Active->EditorReload1Click(Sender);
 }
 //---------------------------------------------------------------------------
+
+
 

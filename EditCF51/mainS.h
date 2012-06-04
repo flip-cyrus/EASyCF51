@@ -113,6 +113,8 @@ __published:	// IDE-managed Components
         TAction *EditRedo;
         TMenuItem *Redo1;
         TToolButton *ToolButton7;
+  TLabel *Label1;
+  TLabel *Label2;
         void __fastcall mnuSaveAsClick(TObject *Sender);
         void __fastcall mnuExitClick(TObject *Sender);
         void __fastcall mnuOpenClick(TObject *Sender);

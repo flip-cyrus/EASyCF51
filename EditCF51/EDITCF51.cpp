@@ -21,16 +21,16 @@ WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
         try
         {
                  Application->Initialize();
-                 Application->Title = "EASy68K";
+                 Application->Title = "EASyCF51";
                  Application->CreateForm(__classid(TMain), &Main);
-                 Application->CreateForm(__classid(TAboutBox), &AboutBox);
-                 Application->CreateForm(__classid(TAssemblerBox), &AssemblerBox);
-                 Application->CreateForm(__classid(TChkSave), &ChkSave);
-                 Application->CreateForm(__classid(TOptions), &Options);
-                 Application->CreateForm(__classid(TEditorOptionsForm), &EditorOptionsForm);
-                 Application->CreateForm(__classid(TfindDialogFrm), &findDialogFrm);
-                 Application->CreateForm(__classid(TreplaceDialogFrm), &replaceDialogFrm);
-                 Application->Run();
+     Application->CreateForm(__classid(TAboutBox), &AboutBox);
+     Application->CreateForm(__classid(TAssemblerBox), &AssemblerBox);
+     Application->CreateForm(__classid(TChkSave), &ChkSave);
+     Application->CreateForm(__classid(TOptions), &Options);
+     Application->CreateForm(__classid(TEditorOptionsForm), &EditorOptionsForm);
+     Application->CreateForm(__classid(TfindDialogFrm), &findDialogFrm);
+     Application->CreateForm(__classid(TreplaceDialogFrm), &replaceDialogFrm);
+     Application->Run();
         }
         catch (Exception &exception)
         {

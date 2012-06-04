@@ -229,6 +229,9 @@ int printError(FILE *outFile, int errorCode, int lineNum)
     case BAD_BITFIELD:
       sprintf(buffer, "ERROR: Invalid bitfield\n");
       break;
+    case NOT_IMPLEMENTED: //(kl)
+      sprintf(buffer, "ERROR: Instruction not implemented\n");
+      break;
     default :
       if (errorCode > MINOR)
         sprintf(buffer, "ERROR: No message defined\n");

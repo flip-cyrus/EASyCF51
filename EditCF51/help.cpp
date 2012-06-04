@@ -7,7 +7,7 @@
 #pragma hdrstop
 #include <string.h>
 #include "help.h"
-#include "ez68k.h"
+#include "ezCF51.h"
 
 //---------------------------------------------------------------------------
 
@@ -24,7 +24,7 @@ typedef struct {
 
 // Context words should contain alpha num characters only
 idh_cont context[] = {
-        {"EASY68K",	        IDH_INTRO},
+        {"EASYCF51",	        IDH_INTRO},
         {"68000",               IDH_QUICKREF},
         {"ABCD",                IDH_ABCD},
         {"ADD",                 IDH_ADD},

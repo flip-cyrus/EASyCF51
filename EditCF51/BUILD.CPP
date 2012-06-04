@@ -55,7 +55,11 @@ extern bool pass2;
 
 /**********************************************************************
  *
- *	Function move builds the MOVE and MOVEA instructions
+ *	Function move builds the following instructions:
+ *    MOVE
+ *    MOVEA
+ *    MVS    (kl)
+ *    MVZ    (kl)
  *
  **********************************************************************/
 
@@ -97,6 +101,8 @@ int move(int mask, int size,
  *	 RTR
  *	 RTS
  *	 TRAPV
+ *   PULSE (kl)
+ *   TPF (only byte version) (kl)
  *
  ***********************************************************************/
 
@@ -130,6 +136,8 @@ int zeroOp(int mask, int size,
  *	 ROXd <ea>
  *	 TAS
  *	 TST
+ *   TPF    (word and longword version) (kl)
+ *   WDDATA                             (kl)
  *
  ***********************************************************************/
 
@@ -155,11 +163,11 @@ int	oneOp(int mask, int size,
  *	 CHK
  *	 CMP
  *	 CMPA
- *	 DIVS
- *	 DIVU
+ *	 DIVS.W
+ *	 DIVU.W
  *	 LEA
- *	 MULS
- *	 MULU
+ *	 MULS.W
+ *	 MULU.W
  *	 OR <ea>,Dn
  *	 SUB <ea>,Dn
  *	 SUBA
@@ -204,6 +212,25 @@ int	arithReg(int mask, int size,
   return NORMAL;
 }
 
+/**********************************************************************
+ *
+ *	Function arithLong builds the following instructions:
+ *	 DIVS.L
+ *   DIVU.L
+ *   MULS.L
+ *   MULU.L
+ *   REMS
+ *   REMU
+ *
+ ***********************************************************************/
+int	arithLong(int, int, opDescriptor *, opDescriptor *, int *errorPtr)
+{
+  if (pass2)
+      NEWERROR(*errorPtr, NOT_IMPLEMENTED);
+//    Application->MessageBox("Arithmetic LONG instructions not yet implemented.", "Error", MB_OK);
+  return NORMAL;
+}
+
 
 /**********************************************************************
  *
@@ -219,7 +246,6 @@ int	arithReg(int mask, int size,
  *	 SUB Dn,<ea>
  *
  ***********************************************************************/
-
 
 int	arithAddr(int mask, int size,
                   opDescriptor *source, opDescriptor *dest,
@@ -599,7 +625,6 @@ int branch(int mask, int size, opDescriptor *source, opDescriptor *dest,
  *
  ***********************************************************************/
 
-
 int moveq(int mask, int size, opDescriptor *source, opDescriptor *dest,
           int *errorPtr)
 {
@@ -613,6 +638,25 @@ int moveq(int mask, int size, opDescriptor *source, opDescriptor *dest,
   return NORMAL;
 }
 
+
+/**********************************************************************
+ *
+ *	Function mov3q builds the MOV3Q instruction.
+ *
+ ***********************************************************************/
+
+int mov3q(int mask, int size,
+         opDescriptor *source, opDescriptor *dest, int *errorPtr)
+{
+  if (pass2) {
+    output(mask | effAddr(dest) | ((source->data & 0x07) << 9), WORD_SIZE);
+    if (source->data & 0xFFF8 )
+      NEWERROR(*errorPtr, INV_MOVE_QUICK_CONST);
+  }
+  loc += 2;
+
+  return NORMAL;
+}
 
 /**********************************************************************
  *
@@ -645,10 +689,6 @@ int immedToCCR(int mask, int size, opDescriptor *source, opDescriptor *dest,
 /**********************************************************************
  *
  *	Function immedWord builds the following instructions:
- *	 ANDI to SR
- *	 EORI to SR
- *	 ORI to SR
- *	 RTD
  *	 STOP
  *
  ***********************************************************************/
@@ -822,6 +862,11 @@ int twoReg(int mask, int size, opDescriptor *source, opDescriptor *dest,
  *	 EXT
  *	 SWAP
  *	 UNLK
+ *   FF1     (kl)
+ *   EXTB    (kl)
+ *   BITREV  (kl)
+ *   BYTEREV (kl)
+ *   SATS    (kl)
  *
  ***********************************************************************/
 

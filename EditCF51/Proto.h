@@ -38,6 +38,8 @@ int	oneOp(int, int, opDescriptor *, opDescriptor *, int *);
 
 int	arithReg(int, int, opDescriptor *, opDescriptor *, int *);
 
+int	arithLong(int, int, opDescriptor *, opDescriptor *, int *);
+
 int	arithAddr(int, int, opDescriptor *, opDescriptor *, int *);
 
 int	bitField(int, int, opDescriptor *, opDescriptor *, int *);
@@ -61,6 +63,10 @@ int	trap(int, int, opDescriptor *, opDescriptor *, int *);
 int	branch(int, int, opDescriptor *, opDescriptor *, int *);
 
 int	moveq(int, int, opDescriptor *, opDescriptor *, int *);
+
+int	mov3q(int, int, opDescriptor *, opDescriptor *, int *);
+
+int	movExt(int, int, opDescriptor *, opDescriptor *, int *);
 
 int	immedToCCR(int, int, opDescriptor *, opDescriptor *, int *);
 

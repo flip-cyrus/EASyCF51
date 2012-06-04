@@ -32,7 +32,7 @@
 #define isRegNum(c) ((c >= '0') && (c <= '7'))
 
 
-const char TITLE[] = "EASy68K Editor/Assembler v5.12.0";
+const char TITLE[] = "EASyCF51 Editor/Assembler v1.0.0";
 
 /* Status values */
 
@@ -79,6 +79,7 @@ const int REG_MULT_DEFS	        = 0x304;
 const int REG_LIST_UNDEF	= 0x305;
 const int INV_FORWARD_REF	= 0x306;
 const int INV_LENGTH	        = 0x307;
+const int NOT_IMPLEMENTED     = 0x308;  // added for new CF instructions (kl)
 
 /* Minor errors */
 const int MINOR		        = 0x200;
@@ -255,7 +256,6 @@ const TColor DEFAULT_LABEL_COLOR = clPurple;
 const TColor DEFAULT_STRUCTURE_COLOR = clMaroon;
 const TColor DEFAULT_ERROR_COLOR = clRed;
 const TColor DEFAULT_TEXT_COLOR = clTeal;
-const TColor DEFAULT_BACK_COLOR = clWhite;
 
 // function prototype definitions
 #include "proto.h"

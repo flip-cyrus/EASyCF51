@@ -1,10 +1,10 @@
 object Main: TMain
-  Left = 552
-  Top = 183
+  Left = 281
+  Top = 139
   Width = 567
   Height = 342
   HelpContext = 1000
-  Caption = 'EASy68K Editor '
+  Caption = 'EASyCF51 Editor '
   Color = clAppWorkSpace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -218,6 +218,32 @@ object Main: TMain
       ParentShowHint = False
       ShowHint = True
       OnClick = tbAssembleClick
+    end
+    object Label2: TLabel
+      Left = 347
+      Top = 0
+      Width = 20
+      Height = 22
+      Constraints.MinWidth = 20
+    end
+    object Label1: TLabel
+      Left = 367
+      Top = 0
+      Width = 93
+      Height = 22
+      Align = alRight
+      Alignment = taRightJustify
+      BiDiMode = bdRightToLeft
+      Caption = 'Coldfire version'
+      Color = clMenuBar
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentBiDiMode = False
+      ParentColor = False
+      ParentFont = False
     end
   end
   object OpenDialog: TOpenDialog
