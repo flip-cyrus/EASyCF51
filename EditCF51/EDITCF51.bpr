@@ -3,13 +3,13 @@
 <PROJECT>
   <MACROS>
     <VERSION value="BCB.06.00"/>
-    <PROJECT value="EDIT68K.exe"/>
-    <OBJFILES value="EDIT68K.obj textS.obj aboutS.obj ASSEMBLE.obj assembleS.obj BUILD.obj 
+    <PROJECT value="EDITCF51.exe"/>
+    <OBJFILES value="EDITCF51.obj textS.obj aboutS.obj ASSEMBLE.obj assembleS.obj BUILD.obj 
       chksaveS.obj CODEGEN.obj DIRECTIV.obj ERROR.obj EVAL.obj GLOBALS.obj 
       INSTLOOK.obj INSTTABL.obj LISTING.obj MACRO.obj mainS.obj MOVEM.obj 
       OBJECT.obj OPPARSE.obj optionsS.obj SYMBOL.obj STRUCTURED.obj 
       editorOptions.obj help.obj findDialogS.obj replaceDialogS.obj"/>
-    <RESFILES value="EDIT68K.res EASy68Kicons.res"/>
+    <RESFILES value="EDITCF51.res EASyCF51icons.res"/>
     <DEFFILE value=""/>
     <RESDEPEN value="$(RESFILES) textS.dfm aboutS.dfm assembleS.dfm chksaveS.dfm mainS.dfm 
       optionsS.dfm editorOptions.dfm findDialogS.dfm replaceDialogS.dfm"/>
@@ -31,7 +31,7 @@
     <LINKER value="ilink32"/>
     <USERDEFINES value=""/>
     <SYSDEFINES value="NO_STRICT"/>
-    <MAINSOURCE value="EDIT68K.cpp"/>
+    <MAINSOURCE value="EDITCF51.cpp"/>
     <INCLUDEPATH value="$(BCB)\Lib;$(BCB)\include;$(BCB)\include\vcl"/>
     <LIBPATH value="$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib"/>
     <WARNINGS value="-w-pch -w-par -w-8027 -w-8026"/>
@@ -53,8 +53,8 @@
     <OTHERFILES value=""/>
   </LINKER>
   <FILELIST>
-      <FILE FILENAME="EDIT68K.cpp" FORMNAME="" UNITNAME="EDIT68K" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="EDIT68K.res" FORMNAME="" UNITNAME="EDIT68K.res" CONTAINERID="ResTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="EDITCF51.cpp" FORMNAME="" UNITNAME="EDITCF51" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="EDITCF51.res" FORMNAME="" UNITNAME="EDITCF51.res" CONTAINERID="ResTool" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="textS.cpp" FORMNAME="TextStuff" UNITNAME="textS" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="aboutS.cpp" FORMNAME="AboutBox" UNITNAME="aboutS" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="ASSEMBLE.CPP" FORMNAME="" UNITNAME="ASSEMBLE" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
@@ -79,7 +79,7 @@
       <FILE FILENAME="STRUCTURED.CPP" FORMNAME="" UNITNAME="STRUCTURED" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="editorOptions.cpp" FORMNAME="EditorOptionsForm" UNITNAME="editorOptions" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="help.cpp" FORMNAME="" UNITNAME="help" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="EASy68Kicons.RC" FORMNAME="" UNITNAME="EASy68Kicons.RC" CONTAINERID="RC" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="EASyCF51icons.RC" FORMNAME="" UNITNAME="EASyCF51icons.RC" CONTAINERID="RC" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="findDialogS.cpp" FORMNAME="findDialogFrm" UNITNAME="findDialogS" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="replaceDialogS.cpp" FORMNAME="replaceDialogFrm" UNITNAME="replaceDialogS" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
   </FILELIST>
@@ -104,14 +104,14 @@ CodePage=1252
 
 [Version Info Keys]
 CompanyName=
-FileDescription=EASy68K Editor/Assembler
-FileVersion=5.12.0.0
+FileDescription=EASyCF51 Editor/Assembler
+FileVersion=0.1.0.0
 InternalName=
 LegalCopyright=GNU general public use license
 LegalTrademarks=
 OriginalFilename=
-ProductName=EASy68K
-ProductVersion=5.12.0
+ProductName=EASyCF51
+ProductVersion=0.1.0
 Comments=
 
 [HistoryLists\hlIncludePath]
