@@ -229,12 +229,12 @@ object Main: TMain
     object Label1: TLabel
       Left = 367
       Top = 0
-      Width = 93
+      Width = 95
       Height = 22
       Align = alRight
       Alignment = taRightJustify
       BiDiMode = bdRightToLeft
-      Caption = 'Coldfire version'
+      Caption = 'Coldfire core V1'
       Color = clMenuBar
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clRed

@@ -297,13 +297,11 @@ flavor cmpifl[] = {
        };
 
 flavor divsfl[] = {
-	{ Data, DnDirect, WORD_SIZE, arithReg, 0, 0x81C0, 0 },
-	{ Data, DnDirect, LONG_SIZE, arithLong, 0, 0x8C40, 0x8000 }
+	{ Data, DnDirect, WL, arithLongSigned, 0, 0x81C0, 0x4C40 }
        };
 
 flavor divufl[] = {
-	{ Data, DnDirect, WORD_SIZE, arithReg, 0, 0x80C0, 0 },
-	{ Data, DnDirect, LONG_SIZE, arithLong, 0, 0x8C40, 0x0000 }
+	{ Data, DnDirect, WL, arithLong, 0, 0x80C0, 0x4C40 }
        };
 
 flavor eorfl[] = {
@@ -385,13 +383,11 @@ flavor moveqfl[] = {
        };
 
 flavor mulsfl[] = {
-	{ Data, DnDirect, WORD_SIZE, arithReg, 0, 0xC1C0, 0 },
- 	{ Data, DnDirect, LONG_SIZE, arithLong, 0, 0x8C00, 0x0800 }
+	{ Data, DnDirect, WL, arithLongSigned, 0, 0xC1C0, 0x4C00 }
        };
 
 flavor mulufl[] = {
-	{ Data, DnDirect, WORD_SIZE, arithReg, 0, 0xC0C0, 0 },
- 	{ Data, DnDirect, LONG_SIZE, arithLong, 0, 0x8C00, 0x0000 }
+	{ Data, DnDirect, WL, arithLong, 0, 0xC0C0, 0x4C00 }
        };
 
 flavor mvsfl[] = {
@@ -437,11 +433,11 @@ flavor pulsefl[] = {
 	   };
 
 flavor remsfl[] = {
-	{ AddrIndirect | DnDirect, DnDirect, LONG_SIZE, arithLong, 0, 0x4C40, 0x0800 }
+	{ AddrIndirect | DnDirect, DnDouble, LONG_SIZE, arithLongSigned, 0, 0x4C40, 0x4C40 }
 	   };
 
 flavor remufl[] = {
-	{ AddrIndirect | DnDirect, DnDirect, LONG_SIZE, arithLong, 0, 0x4C40, 0x0000 }
+	{ AddrIndirect | DnDirect, DnDouble, LONG_SIZE, arithLong, 0, 0x4C40, 0x4C40 }
 	   };
 
 flavor rtefl[] = {

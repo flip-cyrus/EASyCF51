@@ -40,6 +40,8 @@ int	arithReg(int, int, opDescriptor *, opDescriptor *, int *);
 
 int	arithLong(int, int, opDescriptor *, opDescriptor *, int *);
 
+int	arithLongSigned(int, int, opDescriptor *, opDescriptor *, int *);
+
 int	arithAddr(int, int, opDescriptor *, opDescriptor *, int *);
 
 int	bitField(int, int, opDescriptor *, opDescriptor *, int *);

@@ -32,7 +32,7 @@
 #define isRegNum(c) ((c >= '0') && (c <= '7'))
 
 
-const char TITLE[] = "EASyCF51 Editor/Assembler v1.0.0";
+const char TITLE[] = "EASyCF51 Editor/Assembler v0.1.0";
 
 /* Status values */
 
@@ -208,6 +208,7 @@ const int USPDirect		= 0x04000;
 const int SFCDirect		= 0x08000;
 const int DFCDirect		= 0x10000;
 const int VBRDirect		= 0x20000;
+const int DnDouble    = 0x40000; // used for REMx instructions (kl)
 
 
 /* Register and operation size codes/bitmasks */

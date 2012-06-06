@@ -6,9 +6,9 @@
     <PROJECT value="EDITCF51.exe"/>
     <OBJFILES value="EDITCF51.obj textS.obj aboutS.obj ASSEMBLE.obj assembleS.obj BUILD.obj 
       chksaveS.obj CODEGEN.obj DIRECTIV.obj ERROR.obj EVAL.obj GLOBALS.obj 
-      INSTLOOK.obj INSTTABL.obj LISTING.obj MACRO.obj mainS.obj MOVEM.obj 
-      OBJECT.obj OPPARSE.obj optionsS.obj SYMBOL.obj STRUCTURED.obj 
-      editorOptions.obj help.obj findDialogS.obj replaceDialogS.obj"/>
+      INSTLOOK.obj LISTING.obj MACRO.obj mainS.obj MOVEM.obj OBJECT.obj 
+      OPPARSE.obj optionsS.obj SYMBOL.obj STRUCTURED.obj editorOptions.obj 
+      help.obj findDialogS.obj replaceDialogS.obj INSTTABLCF.obj"/>
     <RESFILES value="EDITCF51.res EASyCF51icons.res"/>
     <DEFFILE value=""/>
     <RESDEPEN value="$(RESFILES) textS.dfm aboutS.dfm assembleS.dfm chksaveS.dfm mainS.dfm 
@@ -29,7 +29,7 @@
     <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
     <RELEASELIBPATH value="$(BCB)\lib\release"/>
     <LINKER value="ilink32"/>
-    <USERDEFINES value=""/>
+    <USERDEFINES value="_DEBUG"/>
     <SYSDEFINES value="NO_STRICT"/>
     <MAINSOURCE value="EDITCF51.cpp"/>
     <INCLUDEPATH value="$(BCB)\Lib;$(BCB)\include;$(BCB)\include\vcl"/>
@@ -38,12 +38,12 @@
     <OTHERFILES value=""/>
   </MACROS>
   <OPTIONS>
-    <CFLAG1 value="-O2 -H=c:\PROGRA~1\borland\CBUILD~1\lib\vcl60.csm -Hc -Vx -Ve -X- -a8 -b- 
-      -k- -vi -c -tW -tWM"/>
-    <PFLAGS value="-$Y- -$L- -$D- -$A8 -v -JPHNE -M"/>
+    <CFLAG1 value="-Od -H=c:\PROGRA~1\borland\CBUILD~1\lib\vcl60.csm -Hc -w -Vx -Ve -X- -r- 
+      -a8 -b- -k -y -v -vi- -c -tW -tWM"/>
+    <PFLAGS value="-$Y+ -$W -$O- -$A8 -v -JPHNE -M"/>
     <RFLAGS value=""/>
     <AFLAGS value="/mx /w2 /zn"/>
-    <LFLAGS value="-D&quot;&quot; -H:0x1000000 -Hc:0x100000 -Sc:0x10000 -aa -Tpe -x -Gn"/>
+    <LFLAGS value="-D&quot;&quot; -H:0x1000000 -Hc:0x100000 -Sc:0x10000 -aa -Tpe -x -Gn -v"/>
     <OTHERFILES value=""/>
   </OPTIONS>
   <LINKER>
@@ -67,7 +67,6 @@
       <FILE FILENAME="EVAL.CPP" FORMNAME="" UNITNAME="EVAL" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="GLOBALS.CPP" FORMNAME="" UNITNAME="GLOBALS" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="INSTLOOK.CPP" FORMNAME="" UNITNAME="INSTLOOK" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="INSTTABL.CPP" FORMNAME="" UNITNAME="INSTTABL" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="LISTING.CPP" FORMNAME="" UNITNAME="LISTING" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="MACRO.CPP" FORMNAME="" UNITNAME="MACRO" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="mainS.cpp" FORMNAME="Main" UNITNAME="mainS" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
@@ -79,9 +78,10 @@
       <FILE FILENAME="STRUCTURED.CPP" FORMNAME="" UNITNAME="STRUCTURED" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="editorOptions.cpp" FORMNAME="EditorOptionsForm" UNITNAME="editorOptions" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="help.cpp" FORMNAME="" UNITNAME="help" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="EASyCF51icons.RC" FORMNAME="" UNITNAME="EASyCF51icons.RC" CONTAINERID="RC" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="EASyCF51icons.RC" FORMNAME="" UNITNAME="EASyCF51icons.RC" CONTAINERID="RCCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="findDialogS.cpp" FORMNAME="findDialogFrm" UNITNAME="findDialogS" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="replaceDialogS.cpp" FORMNAME="replaceDialogFrm" UNITNAME="replaceDialogS" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="INSTTABLCF.cpp" FORMNAME="" UNITNAME="INSTTABLCF" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
   </FILELIST>
   <BUILDTOOLS>
   </BUILDTOOLS>
@@ -90,8 +90,8 @@
 [Version Info]
 IncludeVerInfo=1
 AutoIncBuild=0
-MajorVer=5
-MinorVer=12
+MajorVer=0
+MinorVer=1
 Release=0
 Build=0
 Debug=0
@@ -152,11 +152,5 @@ RemoteDebug=0
 [Compiler]
 ShowInfoMsgs=0
 LinkDebugVcl=0
-LinkCGLIB=0
-
-[Language]
-ActiveLang=
-ProjectLang=
-RootDir=
   </IDEOPTIONS>
 </PROJECT>

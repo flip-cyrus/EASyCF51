@@ -223,14 +223,53 @@ int	arithReg(int mask, int size,
  *   REMU
  *
  ***********************************************************************/
-int	arithLong(int, int, opDescriptor *, opDescriptor *, int *errorPtr)
+int	arithLong(int mask, int size,
+              opDescriptor *source, opDescriptor *dest,
+              int *errorPtr)
 {
-  if (pass2)
-      NEWERROR(*errorPtr, NOT_IMPLEMENTED);
-//    Application->MessageBox("Arithmetic LONG instructions not yet implemented.", "Error", MB_OK);
+  // word sized versions are handled by the normal arithReg function
+  if (size == WORD_SIZE) {
+    arithReg(mask, size, source, dest, errorPtr);
+    return NORMAL;
+  }
+  // handle long sized versions
+  if (pass2) {
+    output(mask | effAddr(source), WORD_SIZE);
+    if  (dest->mode == DnDouble) // REMx instruction
+    {
+      //dest->field is used to distinguish between signed and unsigned version
+      //dest->index contains the number of the register holding the dividend
+      output((dest->index << 12) | dest->reg | (dest->field << 11), WORD_SIZE);
+    }
+    else if (mask & 0xFF)  // DIVx.L
+    {
+      //dest->field is used to distinguish between signed and unsigned version
+      //NOTE: destination register appears twice in the instruction format
+      output((dest->reg << 12) | dest->reg | (dest->field << 11) ,WORD_SIZE);
+    }
+    else // MULx.L
+    {
+      //dest->field is used to distinguish between signed and unsigned version
+      output((dest->reg << 12) | (dest->field << 11), WORD_SIZE);
+    }
+  }
+  loc += 4;
+
   return NORMAL;
 }
-
+/**********************************************************************
+ *
+ *	Function arithLongSigned changes the destination, so that
+ *  arithLong builds a signed version of the instruction
+ *
+ ***********************************************************************/
+int	arithLongSigned(int mask, int size,
+              opDescriptor *source, opDescriptor *dest,
+              int *errorPtr)
+{
+  dest->field = 1;
+  return arithLong(mask, size, source, dest, errorPtr);
+}
 
 /**********************************************************************
  *

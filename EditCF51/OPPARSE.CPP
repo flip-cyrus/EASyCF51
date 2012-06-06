@@ -64,6 +64,7 @@ char *opParse(char *p, opDescriptor *d, int *errorPtr)
 
   try {
     d->size = 0;
+    d->field = 0;                     // (kl)
     // if addressing mode in ( )
     // remove spaces inside parenthesis       CK Oct-26-2008
     if (p[0] == '(' || p[1] == '(') {
@@ -113,15 +114,29 @@ char *opParse(char *p, opDescriptor *d, int *errorPtr)
     }
 
     // Check for address or data register direct
-    if (isRegNum(p[1]) && isTerm(p[2])) {
+    // or double register for REMx (kl)
+    if (isRegNum(p[1]) &&  (isTerm(p[2])||(p[2] == ':')) ) {
       if (p[0] == 'D') {
         d->mode = DnDirect;
-	d->reg = p[1] - '0';
-	return (p + 2);
+        d->reg = p[1] - '0';
+        // Look for double register for REMx
+        p += 2;
+        n = skipSpace(p);
+        if (*n == ':')
+        {
+          n = skipSpace(++n);
+          if ((n[0] == 'D') && isRegNum(n[1]) && isTerm(n[2]))
+          {
+            d->mode = DnDouble;
+            d->index = n[1] - '0';
+            p = n+2;
+          }
+        }
+        return (p);
       } else if (p[0] == 'A') {
-	d->mode = AnDirect;
-	d->reg = p[1] - '0';
-	return (p + 2);
+        d->mode = AnDirect;
+        d->reg = p[1] - '0';
+        return (p + 2);
       }
     }
     // Check for Stack Pointer (i.e., A7) direct

@@ -1,25 +1,32 @@
 //---------------------------------------------------------------------------
 /*
-Program: 68K Editor IDE
+Program: Coldfire Editor IDE
+Written By: Karsten Langeloh
+
+Based on:
+------------------------------------
+68K Editor IDE
 Written By: Tim Larson
 Program Start Date: January 24, 2002
 Modified By: Chuck Kelly
+------------------------------------
 
 *******
 PURPOSE
 *******
-I have designed this program for my CIS 258 Assembly Language Programming using
-the 68000 class at Monroe County Community College.
-
+This program is an adapted version of the EASy68k Editor for the Coldfire. It is
+mainly designed for use in a teaching class at
+"FH Wedel - University of Applied Sciences" in Wedel, Germany http://fh-wedel.de
+The development is driven by tematik GmbH http://www.tematik.de
 
 ***********
 Description
 ***********
 
-The 68K Editor is a 68000 code editing program that has an integrated assembler.
+The CF51 Editor is a Coldfire code editing program that has an integrated assembler.
 The IDE allows you to write programs and easily assemble them using a familar
-Windows look.  It is designed to work with the 68000 Simulator, written by Chuck
-Kelly, to run the assembled programs.
+Windows look.  It is designed to work with the Coldfire Simulator, based on the
+68000 assembler written by Chuck Kelly, to run the assembled programs.
 
 ------------------------------------------------------------------------------*/
 
@@ -854,4 +861,4 @@ void __fastcall TMain::Reload1Click(TObject *Sender)
 //---------------------------------------------------------------------------
 
 
-
+                                 

@@ -1,14 +1,14 @@
-<<<<< Instructions for compiling EASy68K >>>>>
+<<<<< Instructions for compiling EASyCF51 >>>>>
 
-EASy68K was created using Borland C++ Builder 6.0 Professional. Builder 6 is no longer available for purchase new but used copies are fairly easy to find.
+EASyCF51 was created using Borland C++ Builder 6.0 Professional. Builder 6 is no longer available for purchase new but used copies are fairly easy to find.
 
-There are project files included for the Editor/Assembler and the Simulator, EDIT68K.BPR and SIM68K.BPR.
+There are project files included for the Editor/Assembler and the Simulator, EDITCF51.BPR and SIMCF51.BPR.
 
-To compile EDIT68K:
-Add the new RichEditPlus control to Builder. See "Installation Instructions.txt" in the RichEditPlus folder in Edit68K source.
+To compile EDITCF51:
+Add the new RichEditPlus control to Builder. See "Installation Instructions.txt" in the RichEditPlus folder in EditCF51 source.
 
 
-To compile SIM68K:
+To compile SIMCF51:
 
 Get the DirectX8 .h files from the Microsoft DirectX SDK. Place them in a folder named DirectX and put the DirectX folder in C:\Program Files\Borland\CBuilder6\Include. 
 
@@ -17,5 +17,5 @@ dsound.lib is from: http://realmike.org/borlibs/index.htm
 
 
 _________________
-Prof Chuck Kelly
+Karsten Langeloh (based on text from Prof Chuck Kelly)
 
