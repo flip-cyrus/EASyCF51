@@ -237,7 +237,7 @@ object Main: TMain
       Caption = 'Coldfire core V1'
       Color = clMenuBar
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clRed
+      Font.Color = clMenuBar
       Font.Height = -13
       Font.Name = 'MS Sans Serif'
       Font.Style = []

@@ -97,18 +97,18 @@ WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
     Application->Initialize();
     Application->Title = "SIM68K";
     Application->CreateForm(__classid(TForm1), &Form1);
-                 Application->CreateForm(__classid(TStackFrm), &StackFrm);
-                 Application->CreateForm(__classid(TMemoryFrm), &MemoryFrm);
-                 Application->CreateForm(__classid(TBreaksFrm), &BreaksFrm);
-                 Application->CreateForm(__classid(TAboutFrm), &AboutFrm);
-                 Application->CreateForm(__classid(TLog), &Log);
-                 Application->CreateForm(__classid(TsimIO), &simIO);
-                 Application->CreateForm(__classid(TAutoTraceOptions), &AutoTraceOptions);
-                 Application->CreateForm(__classid(THardware), &Hardware);
-                 Application->CreateForm(__classid(TfrmFullscreenOptions), &frmFullscreenOptions);
-                 Application->CreateForm(__classid(TLogfileDialog), &LogfileDialog);
-                 Application->CreateForm(__classid(TfindDialogFrm), &findDialogFrm);
-                 Application->Run();
+     Application->CreateForm(__classid(TStackFrm), &StackFrm);
+     Application->CreateForm(__classid(TMemoryFrm), &MemoryFrm);
+     Application->CreateForm(__classid(TBreaksFrm), &BreaksFrm);
+     Application->CreateForm(__classid(TAboutFrm), &AboutFrm);
+     Application->CreateForm(__classid(TLog), &Log);
+     Application->CreateForm(__classid(TsimIO), &simIO);
+     Application->CreateForm(__classid(TAutoTraceOptions), &AutoTraceOptions);
+     Application->CreateForm(__classid(THardware), &Hardware);
+     Application->CreateForm(__classid(TfrmFullscreenOptions), &frmFullscreenOptions);
+     Application->CreateForm(__classid(TLogfileDialog), &LogfileDialog);
+     Application->CreateForm(__classid(TfindDialogFrm), &findDialogFrm);
+     Application->Run();
   }catch (Exception &exception){
     Application->ShowException(&exception);
   }

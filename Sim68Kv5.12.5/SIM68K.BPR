@@ -8,7 +8,7 @@
       CODE6.obj CODE7.obj CODE8.obj CODE9.obj RUN.obj SIMOPS2.obj STARTSIM.obj 
       CODE1.obj Stack1.obj Memory1.obj BREAKPOINTSu.obj aboutS.obj logU.obj 
       BPoint.obj BPointExpr.obj simIOu.obj help.obj Optionsu.obj hardwareu.obj 
-      FullscreenOptions.obj LogfileDialogu.obj Net.obj findDialogS.obj"/>
+      FullscreenOptions.obj LogfileDialogu.obj Net.obj findDialogS.obj CODECF.obj"/>
     <RESFILES value="SIM68K.res"/>
     <IDLFILES value=""/>
     <IDLGENFILES value=""/>
@@ -30,8 +30,8 @@
     <USERDEFINES value=""/>
     <SYSDEFINES value="NO_STRICT"/>
     <MAINSOURCE value="SIM68K.cpp"/>
-    <INCLUDEPATH value="$(BCB)\Include\DirectX;$(BCB)\include;$(BCB)\include\vcl"/>
-    <LIBPATH value="$(BCB)\lib\obj;$(BCB)\lib"/>
+    <INCLUDEPATH value="C:\Programme\Borland\CBuilder6\Projects;$(BCB)\Include\DirectX;$(BCB)\include;$(BCB)\include\vcl"/>
+    <LIBPATH value="C:\Programme\Borland\CBuilder6\Projects;$(BCB)\lib\obj;$(BCB)\lib"/>
     <WARNINGS value="-w-par -w-8027"/>
     <OTHERFILES value=""/>
   </MACROS>
@@ -81,6 +81,7 @@
       <FILE FILENAME="LogfileDialogu.cpp" FORMNAME="LogfileDialog" UNITNAME="LogfileDialogu" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="Net.cpp" FORMNAME="" UNITNAME="Net" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="findDialogS.cpp" FORMNAME="findDialogFrm" UNITNAME="findDialogS" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CODECF.CPP" FORMNAME="" UNITNAME="CODECF" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
   </FILELIST>
   <BUILDTOOLS>
   </BUILDTOOLS>

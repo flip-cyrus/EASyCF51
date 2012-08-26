@@ -178,29 +178,54 @@ unsigned getDivs68kCycles( LONG dividend, SHORT divisor)
 // -----------------------------------------------
 int	DIVS()
 {
-  int	reg;            //, overflow;
+  int	reg;
   long	remainder;
+  long  secondword;   // [kl] to store the second instruction word for long size
 
   int error = eff_addr((long)WORD_MASK, DATA_ADDR, true);
   if (error)            // if address error
     return error;       // return error code
 
-  reg = (inst >> 9) & 0x0007;
+  if (inst & 0x0100)  // [kl] word size
+  {
+    reg = (inst >> 9) & 0x0007;
 
-  from_2s_comp (EV1 & WORD_MASK, (long) WORD_MASK, &source);
-  from_2s_comp (D[reg], LONG_MASK, &dest);
+    from_2s_comp (EV1 & WORD_MASK, (long) WORD_MASK, &source);
+    from_2s_comp (D[reg], LONG_MASK, &dest);
 
-  if (source == 0)
-    return (DIV_BY_ZERO);		// initiate exception processing
+    if (source == 0)
+      return (DIV_BY_ZERO);		// initiate exception processing
 
-  result = (dest / source);
-  if (result > 32767 || result < -32768)  // if overflow
-    SR |= vbit;
-  else {
-    SR &= ~vbit;
-    result &= 0xffff;
-    remainder = (dest % source) & 0xffff;
-    D[reg] = result = result | (remainder * 0x10000);
+    result = (dest / source);
+    if (result > 32767 || result < -32768)  // if overflow
+      SR |= vbit;
+    else
+    {
+      SR &= ~vbit;
+      result &= 0xffff;
+      remainder = (dest % source) & 0xffff;
+      D[reg] = result = result | (remainder * 0x10000);
+      cc_update (N_A, GEN, GEN, N_A, ZER, source, dest, result, (long) WORD_MASK, 0);
+      if ( ( (source < 0) && (dest > 0) ) || ( (source >= 0) && (dest < 0) ) )    // ck 8-10-2005
+        SR |= nbit;
+      else
+        SR &= ~nbit;
+    }
+  }
+  else  // [kl] long size
+  {
+    mem_request(&PC,(long) WORD_SIZE, &secondword);
+    reg = secondword & 0x0007;
+
+    from_2s_comp (EV1 & LONG_MASK, (long) LONG_MASK, &source);
+    from_2s_comp (D[reg], LONG_MASK, &dest);
+
+    if (source == 0)
+      return (DIV_BY_ZERO);		// initiate exception processing
+
+    result = (dest / source);
+    SR &= ~vbit;                   // overflow can not happen
+    D[reg] = result;
     cc_update (N_A, GEN, GEN, N_A, ZER, source, dest, result, (long) WORD_MASK, 0);
     if ( ( (source < 0) && (dest > 0) ) || ( (source >= 0) && (dest < 0) ) )    // ck 8-10-2005
       SR |= nbit;
@@ -215,13 +240,14 @@ int	DIVS()
 //------------------------------------------------
 // DIVU <ea>,Dn
 // Destination / Source --> Destination
-// Size = Word
+// Size = Word, Long
 // Divide the destination operand by the source operand and store the result
 // in the destination. The destination operand is a long operand (32 bits) and
 // the source operand is a word (16 bit) operand. The operation is performed
 // using unsigned arithmetic. The result is a 32-bit result such that:
 //   1. The quotient is in the lower word (least significant 16 bits)
 //   2. The remainder is in the upper word (most significant 16 bits)
+// In case of a long size operation the result is 32-bit quotient
 // Two special condition may arise:
 //   1. Division by zero causes a trap
 //   2. Overflow may be detected and set before completion of the instruction.
@@ -230,25 +256,44 @@ int	DIVS()
 int	DIVU()
 {
   int reg;
+  long secondword;
 
   int error = eff_addr((long)WORD_MASK, DATA_ADDR, true);
   if (error)              // if address error
     return error;         // return error code
 
-  reg = (inst >> 9) & 0x0007;
+  if (inst & 0x8000) // [kl] word size
+  {
+    reg = (inst >> 9) & 0x0007;
 
-  source = EV1 & WORD_MASK;
-  dest = D[reg];
+    source = EV1 & WORD_MASK;
+    dest = D[reg];
 
-  if (source == 0)
-    return (DIV_BY_ZERO);		// initiate exception processing
+    if (source == 0)
+      return (DIV_BY_ZERO);		// initiate exception processing
 
-  if ( ((unsigned)dest / source) > WORD_MASK)
-    SR |= vbit; 		        // check for overflow
-  else {
-    SR &= ~vbit;
-    D[reg] = result =(((unsigned)dest / source) & 0xffff) |
-                      (((unsigned)dest % source) * 0x10000);
+    if ( ((unsigned)dest / source) > WORD_MASK)
+      SR |= vbit; 		        // check for overflow
+    else {
+      SR &= ~vbit;
+      D[reg] = result =(((unsigned)dest / source) & 0xffff) |
+                        (((unsigned)dest % source) * 0x10000);
+      cc_update (N_A, GEN, GEN, N_A, ZER, source, dest, result, (long) WORD_MASK, 0);
+    }
+  }
+  else
+  {
+    mem_request(&PC, (long)WORD_SIZE, &secondword);
+    reg = (secondword) & 0x0007;
+
+    source = EV1 & LONG_MASK;
+    dest = D[reg];
+
+    if (source == 0)
+      return (DIV_BY_ZERO);		// initiate exception processing
+
+    SR &= ~vbit; // no overflow possible
+    D[reg] = result =((unsigned)dest / source);
     cc_update (N_A, GEN, GEN, N_A, ZER, source, dest, result, (long) WORD_MASK, 0);
   }
 
@@ -261,19 +306,35 @@ int	DIVU()
 int	MULS()
 {
   int	reg;
+  long secondword;
 
   int error = eff_addr((long)WORD_MASK, DATA_ADDR, true);
   if (error)              // if address error
     return error;         // return error code
 
-  reg = (inst >> 9) & 0x0007;
+  if (inst & 0x8000)  // [kl] word size
+  {
+    reg = (inst >> 9) & 0x0007;
 
-  from_2s_comp (EV1 & WORD_MASK, (long) WORD_MASK, &source);
-  from_2s_comp (D[reg] & WORD_MASK, (long) WORD_MASK, &dest);
+    from_2s_comp (EV1 & WORD_MASK, (long) WORD_MASK, &source);
+    from_2s_comp (D[reg] & WORD_MASK, (long) WORD_MASK, &dest);
 
-  D[reg] = result = source * dest;
+    D[reg] = result = source * dest;
 
-  cc_update (N_A, GEN, GEN, CASE_9, ZER, source, dest, result, (long) LONG_MASK, 0);  // ck 8-10-2005
+  }
+  else
+  {
+    mem_request(&PC, (long)WORD_SIZE, &secondword);
+    reg = (secondword >> 12) & 0x0007;
+
+    from_2s_comp (EV1 & LONG_MASK, (long) LONG_MASK, &source);
+    from_2s_comp (D[reg] & LONG_MASK, (long) LONG_MASK, &dest);
+
+    D[reg] = result = source * dest;
+  }
+
+  // [kl] note that unlike 68k cpu the v_bit is always cleared
+  cc_update (N_A, GEN, GEN, ZER, ZER, source, dest, result, (long) LONG_MASK, 0);
 
   // timing 38 + 2n clocks where n is
   // concatanate the <ea> with a zero as the LSB; n is the resultant number of
@@ -297,20 +358,35 @@ int	MULS()
 
 
 //------------------------------------------------
+// TODO: add support for 32 x 32 -> 32
 int	MULU()
 {
   int	reg;
+  long secondword;
 
   int error = eff_addr((long)WORD_MASK, DATA_ADDR, true);
   if (error)              // if address error
     return error;         // return error code
 
-  reg = (inst >> 9) & 0x0007;
+  if (inst & 0x8000)
+  {
+    reg = (inst >> 9) & 0x0007;
 
-  source = EV1 & WORD_MASK;
-  dest = D[reg] & WORD_MASK;
+    source = EV1 & WORD_MASK;
+    dest = D[reg] & WORD_MASK;
 
-  D[reg] = result = source * dest;
+    D[reg] = result = source * dest;
+  }
+  else
+  {
+    mem_request(&PC, (long)WORD_SIZE, &secondword);
+    reg = (secondword >> 12) & 0x0007;
+
+    source = EV1 & LONG_MASK;
+    dest = D[reg] & LONG_MASK;
+
+    D[reg] = result = source * dest;
+  }
 
   cc_update (N_A, GEN, GEN, ZER, ZER, source, dest, result, LONG_MASK, 0);
 

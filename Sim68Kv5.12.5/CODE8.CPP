@@ -30,6 +30,9 @@ int BCC()
   if (displacement == 0) {
     mem_request (&PC, (long) WORD_MASK, &displacement);
     from_2s_comp (displacement, (long) WORD_MASK, &displacement);
+  } else if (displacement == 0xff) {                            //[kl] long support
+    mem_request (&PC, (long) LONG_MASK, &displacement);
+    from_2s_comp (displacement, (long) LONG_MASK, &displacement);
   } else
     from_2s_comp (displacement, (long) BYTE_MASK, &displacement);
 
@@ -113,6 +116,9 @@ int BRA()
   if (displacement == 0) {
     mem_request (&PC, (long) WORD_MASK, &displacement);
     from_2s_comp (displacement, (long) WORD_MASK, &displacement);
+  } else if (displacement == 0xff) {                         //[kl] long support
+    mem_request (&PC, (long) LONG_MASK, &displacement);
+    from_2s_comp (displacement, (long) LONG_MASK, &displacement);
   } else
     from_2s_comp (displacement, (long) BYTE_MASK, &displacement);
 
@@ -134,6 +140,9 @@ int	BSR()
   if (displacement == 0) {
     mem_request (&PC, (long) WORD_MASK, &displacement);
     from_2s_comp (displacement, (long) WORD_MASK, &displacement);
+  } else if (displacement == 0xff) {                         //[kl] long support
+    mem_request (&PC, (long) LONG_MASK, &displacement);
+    from_2s_comp (displacement, (long) LONG_MASK, &displacement);
   } else
     from_2s_comp (displacement, (long) BYTE_MASK, &displacement);
 
