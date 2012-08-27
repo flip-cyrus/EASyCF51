@@ -217,6 +217,36 @@ int PULSE()
 // calculate remainder (singned or unsigned)
 int REMX()
 {
+  int reg, remainreg;
+  long secondword;
+
+  int error = eff_addr((long)WORD_MASK, 0x003d, true);
+  if (error)            // if address error
+    return error;       // return error code
+
+  mem_request(&PC, (long) WORD_SIZE, &secondword);
+
+  reg = (secondword >> 12) & 0x7;
+  remainreg = secondword & 0x7;
+
+  if (secondword & 0x0800) // signed
+  {
+    from_2s_comp (EV1 & LONG_MASK, (long) LONG_MASK, &source);
+    from_2s_comp (D[reg], LONG_MASK, &dest);
+  }
+  else //unsigned
+  {
+    source = EV1;
+    dest = D[reg];
+  }
+  if (source == 0)
+    return (DIV_BY_ZERO);		// initiate exception processing
+
+  result = dest % source;
+  D[remainreg] = result;
+
+  cc_update(N_A, GEN, GEN, GEN, ZER, source, dest, result, LONG_SIZE, 0);
+
   return SUCCESS;
 }
 
