@@ -98,11 +98,17 @@ int FF1()
 	source = D[reg] & LONG_MASK;
 	dest = D[reg] & LONG_MASK;
 
-  result = 0;
-  while (! (source & runner_mask) )
+  if (!source)
+    result = 32;
+  else
   {
-    runner_mask = runner_mask << 1;
-    result++;
+    result = 0;
+    runner_mask = 0x80000000;
+    while (! (source & runner_mask) )
+    {
+      runner_mask = runner_mask >> 1;
+      result++;
+    }
   }
 
   put (&D[reg], result, (long) LONG_MASK);
@@ -126,7 +132,7 @@ int MOV3Q()
   source = (inst >> 9) & 0x07;
   dest = EV1;
 
-  source = (!source)? 0xFFFFFFFF: source; //0 stands for -1
+  source = (!source)? 0xFFFFFFFF: source; //0 represents -1
   put(EA1,source,(long) LONG_MASK);
   result = source;
 
@@ -153,7 +159,10 @@ int MVS()
   dest = D[reg];
 
   /* the source data is sign extended to a longword */
-  sign_extend ((int)source, size_mask, &D[reg]);
+  if (size_mask == WORD_MASK)
+    D[reg] = source | (0xffff0000 * (source >> 15));
+  else // BYTE
+    D[reg] = source | (0xffffff00 * (source >> 7));
 
   cc_update (N_A, GEN, GEN, ZER, ZER, source, dest, D[reg], LONG_MASK, 0);
   inc_cyc (1);
@@ -262,7 +271,7 @@ int SATS()
   {
     source = D[reg];
     dest = D[reg];
-    if (source & 0x8000000)
+    if (source & 0x80000000)
       result = 0x7FFFFFFF;
     else
       result = 0x80000000;

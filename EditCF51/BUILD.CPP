@@ -43,6 +43,10 @@
  *              Monroe County Community College
  *              http://www.monroeccc.edu/ckelly
  *
+ *    05/2012   Karsten Langeloh - Coldfire version (core V1)
+ *              tematik GmbH
+ *              http://www.tematik.de
+ *
  ************************************************************************/
 
 
@@ -136,7 +140,6 @@ int zeroOp(int mask, int size,
  *	 ROXd <ea>
  *	 TAS
  *	 TST
- *   TPF    (word and longword version) (kl)
  *   WDDATA                             (kl)
  *
  ***********************************************************************/
@@ -148,6 +151,24 @@ int	oneOp(int mask, int size,
   if (pass2)
     output((int) (mask | effAddr(source)), WORD_SIZE);
   loc += 2;
+  extWords(source, size, errorPtr);
+
+  return NORMAL;
+}
+
+/**********************************************************************
+ *
+ * Function tpf builds the word and longword versions of the
+ * TPF instruction
+***********************************************************************/
+int	tpf(int mask, int size,
+                opDescriptor *source, opDescriptor *dest,
+                int *errorPtr)
+{
+  if (pass2)
+    output((int) mask , WORD_SIZE);
+  loc += 2;
+  source->mode = IMMEDIATE;
   extWords(source, size, errorPtr);
 
   return NORMAL;
@@ -235,6 +256,7 @@ int	arithLong(int mask, int size,
   // handle long sized versions
   if (pass2) {
     output(mask | effAddr(source), WORD_SIZE);
+    loc += 2;
     if  (dest->mode == DnDouble) // REMx instruction
     {
       //dest->field is used to distinguish between signed and unsigned version
@@ -252,8 +274,10 @@ int	arithLong(int mask, int size,
       //dest->field is used to distinguish between signed and unsigned version
       output((dest->reg << 12) | (dest->field << 11), WORD_SIZE);
     }
+    loc += 2;
   }
-  loc += 4;
+  else
+    loc += 4;
 
   return NORMAL;
 }
@@ -687,9 +711,11 @@ int moveq(int mask, int size, opDescriptor *source, opDescriptor *dest,
 int mov3q(int mask, int size,
          opDescriptor *source, opDescriptor *dest, int *errorPtr)
 {
+  int immediatevalue;
   if (pass2) {
-    output(mask | effAddr(dest) | ((source->data & 0x07) << 9), WORD_SIZE);
-    if (source->data & 0xFFF8 )
+    immediatevalue =  (source->data & 0x8000)?0:source->data & 0x07;
+    output(mask | effAddr(dest) | (immediatevalue << 9), WORD_SIZE);
+    if ((source->data > 7 ) || (source->data == 0) || (source->data < -1))
       NEWERROR(*errorPtr, INV_MOVE_QUICK_CONST);
   }
   loc += 2;

@@ -636,7 +636,7 @@ int createCode(char *capLine, int *errorPtr) {
             }
           }
           sourceParsed = true;
-        }
+        } // !sourceParsed
         if (!destParsed && flavorPtr->dest) {   // if destination needs parsing
           p = skipSpace(p);     // skip spaces after source operand
           if (*p != ',') {
@@ -667,8 +667,8 @@ int createCode(char *capLine, int *errorPtr) {
             return NORMAL;
           }
           destParsed = true;
-        }
-        if (!flavorPtr->source) {
+        } // !destParsed
+        if ((!flavorPtr->source) && ((!size) || (size & flavorPtr->sizes)))  {
           mask = pickMask( (int) size, flavorPtr, errorPtr);
           // The following line calls the function defined for the current
           // instruction as a flavor in instTable[]
@@ -694,9 +694,9 @@ int createCode(char *capLine, int *errorPtr) {
           (*flavorPtr->exec)(mask, (int) size, &source, &dest, errorPtr);
           return NORMAL;
         }
-      }
+      } // for flavorCount
       NEWERROR(*errorPtr, INV_ADDR_MODE);
-    } else {
+    } else { // if !(tablePtr->parseFlag)
       // The following line calls the function defined for the current
       // instruction as a flavor in instTable[]
       (*tablePtr->exec)( (int) size, label, p, errorPtr);
@@ -874,6 +874,7 @@ int tokenize(char* instr, char* delim, char *token[], char* tokens){
   }
   return tokCount;
 }
+
 
 
 

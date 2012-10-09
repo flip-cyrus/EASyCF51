@@ -563,8 +563,9 @@ flavor tasfl[] = {
        };
 
 flavor tpffl[] = {
-	{ 0, 0, 0, zeroOp, 0, 0x51FC, 0 },
-	{ IMMEDIATE, 0, WL, oneOp, 0, 0x51FA, 0x51FB }
+ 	{ 0, 0, 0, zeroOp, 0, 0x51FC, 0 },
+	{ 0, 0, WL, tpf, 0, 0x51FA, 0x51FB },
+	{ IMMEDIATE, 0, WL, tpf, 0, 0x51FA, 0x51FB }
 	   };
 
 flavor trapfl[] = {

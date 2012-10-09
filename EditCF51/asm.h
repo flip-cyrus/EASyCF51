@@ -12,6 +12,10 @@
  *              Monroe County Community College
  *              http://www.monroeccc.edu/ckelly
  *
+ *    05/2012   Karsten Langeloh - Coldfire version (core V1)
+ *              tematik GmbH
+ *              http://www.tematik.de
+ *
  ************************************************************************/
 #ifndef asmH
 #define asmH

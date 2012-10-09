@@ -56,13 +56,13 @@ struct inst_rec {
 			{	0x0000, 0x023c, "ANDI_TO_CCR " },
 			{	0x0000, 0x027c, "ANDI_TO_SR  " },
 			{	0x0ec7, 0x0108, "MOVEP       " },
-			{	0x00ff, 0x0200, "ANDI        " },
-			{	0x00ff, 0x0000, "ORI         " },
-			{	0x00ff, 0x0400, "SUBI        " },
+			{	0x0007, 0x0280, "ANDI        " },
+			{	0x0007, 0x0080, "ORI         " },
+			{	0x0007, 0x0480, "SUBI        " },
       { 0x0007, 0x00c0, "BITREV      " },       //10
       { 0x0007, 0x02c0, "BYTEREV     " },
       { 0x000f, 0x04c0, "FF1         " },
-			{	0x00ff, 0x0600, "ADDI        " },
+			{	0x0007, 0x0680, "ADDI        " },
 			{	0x00ff, 0x0800, "BIT_OP      " },
 			{	0x00ff, 0x0a00, "EORI        " },
 			{	0x00ff, 0x0c00, "CMPI        " },
@@ -110,9 +110,9 @@ struct inst_rec {
 			{	0x0e3f, 0x4180, "CHK         " },
 			{	0x0e3f, 0x41c0, "LEA         " },
 			{	0x0f07, 0x50c8, "DBCC        " },       //[60]
-			{	0x0f3f, 0x50c0, "SCC         " },
-			{	0x0eff, 0x5100, "SUBQ        " },
-			{	0x0eff, 0x5000, "ADDQ        " },
+			{	0x0f07, 0x50c0, "SCC         " },
+			{	0x0e3f, 0x5180, "SUBQ        " },
+			{	0x0e3f, 0x5080, "ADDQ        " },
       { 0x0007, 0x51f8, "TPF         " },
 			{	0x00ff, 0x6000, "BRA         " },       //[65]
 			{	0x00ff, 0x6100, "BSR         " },
@@ -127,8 +127,8 @@ struct inst_rec {
 			{	0x0f3f, 0x90c0, "SUBA        " },       //[75]
 			{	0x0ecf, 0x9100, "SUBX        " },
 			{	0x0fff, 0x9000, "SUB         " },
-                        {       0x0fff, 0xa000, "LINE_1010   " },       //[78]  CK v2.3
-      { 0x0e3f, 0xa140, "MOV3Q       " },
+      { 0x0e3f, 0xa140, "MOV3Q       " },       //[78]
+                        {       0x0fff, 0xa000, "LINE_1010   " },       //  CK v2.3
 			{	0x0f3f, 0xb0c0, "CMPA        " },       //[80]
 			{	0x0ec7, 0xb108, "CMPM        " },
 			{	0x0eff, 0xb000, "CMP         " },
@@ -164,12 +164,12 @@ int	(*(names[]))() =
 		EORI_TO_CCR, EORI_TO_SR, ORI_TO_CCR, ORI_TO_SR,	ANDI_TO_CCR,
 		ANDI_TO_SR, MOVEP, ANDI, ORI, SUBI, BITREV, BYTEREV, FF1, ADDI,
     BIT_OP, EORI, CMPI, BIT_OP, MOVE, MOVEA, MOVE, MOVEA, MOVE,
-    PULSE, ILLEGAL, REMX, SATS, RESET, NOP, STOP, RTE, RTS, TRAPV,
+    ILLEGAL, PULSE, RESET, NOP, STOP, RTE, RTS, TRAPV,
     RTR, LINK, UNLK, MOVE_USP, MOVE_USP, SWAP, EXT, EXT, EXTB,
     REMX, SATS, TRAP, MOVE_FR_SR, MOVE_TO_CCR, MOVE_TO_SR,
 		NBCD, PEA, TAS, JSR, JMP, MOVEM, MOVEM, CLR, NEGX, NEG, NOT,
 		TST, CHK, LEA, DBCC, SCC, SUBQ, ADDQ, TPF, BRA, BSR, BCC, MOVEQ,
-    MVS, MVZ, SBCD,	DIVU, DIVS, OR, SUBA, SUBX, SUB, LINE1010, MOV3Q,
+    MVS, MVZ, SBCD,	DIVU, DIVS, OR, SUBA, SUBX, SUB, MOV3Q, LINE1010,
     CMPA, CMPM, CMP, EOR, EXG, EXG, EXG, ABCD, MULS, MULU, AND, ADDA,
     ADDX, ADD, BIT_FIELD, SHIFT_ROT, SHIFT_ROT, LINE1111, WDDATA,
 		};

@@ -13,6 +13,11 @@
  *              http://www.monroeccc.edu/ckelly
  *
  *              Feb-13-2002 CK  Dec-9-2005 CK
+ *
+ *    05/2012   Karsten Langeloh - Coldfire version (core V1)
+ *              tematik GmbH
+ *              http://www.tematik.de
+ *
  ************************************************************************/
 
 /* ANSI C function prototype definitions */
@@ -35,6 +40,8 @@ int	move(int, int, opDescriptor *, opDescriptor *, int *);
 int	zeroOp(int, int, opDescriptor *, opDescriptor *, int *);
 
 int	oneOp(int, int, opDescriptor *, opDescriptor *, int *);
+
+int	tpf(int, int, opDescriptor *, opDescriptor *, int *);
 
 int	arithReg(int, int, opDescriptor *, opDescriptor *, int *);
 
