@@ -442,7 +442,8 @@ char *opParse(char *p, opDescriptor *d, int *errorPtr)
           NEWERROR(*errorPtr, FORCING_SHORT); // forcing short addressing warning
         }
         //(must be long if the symbol isn't defined or if the value is too big
-        else if (!d->backRef || d->data > 32767 || d->data < -32768)
+//      else if (!d->backRef || d->data > 32767 || d->data < -32768)
+        else if (!d->backRef || ( (unsigned int)d->data > 65535) ) // klan 30.07.2013
           d->mode = AbsLong;
         else
           d->mode = AbsShort;

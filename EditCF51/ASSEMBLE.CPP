@@ -98,6 +98,7 @@ extern char empty[];            // used in conditional assembly
 extern int lineNum;
 extern int lineNumL68;
 extern int errorCount, warningCount;
+extern char g_errorsym[256];    // symbol that caused error
 
 extern char line[256];		// Source line
 extern FILE *inFile;		// Input file

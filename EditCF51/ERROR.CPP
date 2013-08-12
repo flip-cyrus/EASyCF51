@@ -44,6 +44,7 @@ extern char buffer[256];  //ck used to form messages for display in windows
 extern char numBuf[20];
 extern bool WARflag;
 extern lineNumL68;      // listing line number
+extern char g_errorsym[256];  // to display name of the symbol that caused error
 TListItem  *ListItem;
 extern char includeFile[256];  // name of current include file
 extern bool includedFileError; // true if include error message displayed
@@ -107,7 +108,7 @@ int printError(FILE *outFile, int errorCode, int lineNum)
       sprintf(buffer, "ERROR: Invalid syntax\n");
       break;
     case UNDEFINED:
-      sprintf(buffer, "ERROR: Undefined symbol\n");
+      sprintf(buffer, "ERROR: Undefined symbol: %s\n",g_errorsym);
       break;
     case DIV_BY_ZERO:
       sprintf(buffer, "ERROR: Division by zero attempted\n");

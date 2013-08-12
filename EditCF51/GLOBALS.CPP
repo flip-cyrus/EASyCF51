@@ -54,6 +54,7 @@ int lineNum;		// source line number
 int lineNumL68;		// listing line number
 char *listPtr;		// Pointer to buffer where a listing line is assembled
 bool continuation;	// TRUE if the listing line is a continuation
+char g_errorsym[256];   // Hold the name of the symbol that caused an error
 
 // Option flags
 bool listFlag;	        // True if a listing is desired

@@ -56,6 +56,7 @@
 
 extern bool pass2;
 extern int loc;
+extern char g_errorsym[256];  // to display name of the symbol that caused error
 extern char buffer[256];  //ck used to form messages for display in windows
 extern char numBuf[20];
 
@@ -349,6 +350,7 @@ char *evalNumber(char *p, int *numberPtr, bool *refPtr, int *errorPtr)
       }
       else
         NEWERROR(*errorPtr, INCOMPLETE);
+        StrCopy(g_errorsym,name);
       *refPtr = false;
     }
 
