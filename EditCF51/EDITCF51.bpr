@@ -8,11 +8,13 @@
       chksaveS.obj CODEGEN.obj DIRECTIV.obj ERROR.obj EVAL.obj GLOBALS.obj 
       INSTLOOK.obj LISTING.obj MACRO.obj mainS.obj MOVEM.obj OBJECT.obj 
       OPPARSE.obj optionsS.obj SYMBOL.obj STRUCTURED.obj editorOptions.obj 
-      help.obj findDialogS.obj replaceDialogS.obj INSTTABLCF.obj"/>
+      help.obj findDialogS.obj replaceDialogS.obj INSTTABLCF.obj 
+      ProgrammerConfig.obj"/>
     <RESFILES value="EDITCF51.res EASyCF51icons.res"/>
     <DEFFILE value=""/>
     <RESDEPEN value="$(RESFILES) textS.dfm aboutS.dfm assembleS.dfm chksaveS.dfm mainS.dfm 
-      optionsS.dfm editorOptions.dfm findDialogS.dfm replaceDialogS.dfm"/>
+      optionsS.dfm editorOptions.dfm findDialogS.dfm replaceDialogS.dfm 
+      ProgrammerConfig.dfm"/>
     <LIBFILES value=""/>
     <LIBRARIES value="dclRichEditPlus.lib bcbsmp.lib vcldb.lib dbrtl.lib bdertl.lib vclx.lib 
       qrpt.lib bcbie.lib vcl.lib rtl.lib"/>
@@ -82,6 +84,7 @@
       <FILE FILENAME="findDialogS.cpp" FORMNAME="findDialogFrm" UNITNAME="findDialogS" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="replaceDialogS.cpp" FORMNAME="replaceDialogFrm" UNITNAME="replaceDialogS" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="INSTTABLCF.cpp" FORMNAME="" UNITNAME="INSTTABLCF" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ProgrammerConfig.cpp" FORMNAME="ProgConfig" UNITNAME="ProgrammerConfig" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
   </FILELIST>
   <BUILDTOOLS>
   </BUILDTOOLS>

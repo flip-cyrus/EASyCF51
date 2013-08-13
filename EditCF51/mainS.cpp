@@ -49,6 +49,7 @@ Windows look.  It is designed to work with the Coldfire Simulator, based on the
 #include "chksaveS.h"
 #include "findDialogS.h"
 #include "asm.h"
+#include "ProgrammerConfig.h"
 
 
 //---------------------------------------------------------------------------
@@ -67,6 +68,9 @@ extern bool SEXflag;            // structured expansion
 extern bool WARflag;            // display warnings
 extern tabTypes tabType;
 extern bool maximizedEdit;      // true starts child edit window maximized
+
+extern AnsiString workfilename; // name of the file used for programming
+extern AnsiString scriptfile;   // name of the programming script
 
 void __fastcall SaveFont(TTextStuff *);
 
@@ -312,6 +316,12 @@ void __fastcall TMain::OpenFile(AnsiString name)
   //create the window
   TextStuff = new TTextStuff(Application);
   TextStuff->LoadFile(name);
+
+  // set programmer script path
+  if (scriptfile == "")
+  {
+    scriptfile = ExtractFilePath(name) + "prog.cfg";
+  }
 }
 
 //--------------------------------------------------------------------------
@@ -374,6 +384,7 @@ void __fastcall TMain::mnuDoAssemblerClick(TObject *Sender)
       WARflag  = Options->chkShowWarnings->Checked;
 
       // use path of selected source file as temp working directory
+      workfilename = Active->Project.CurrentFile.SubString(0,Active->Project.CurrentFile.Length()-3) + "S68";
       SetCurrentDir(ExtractFilePath(Active->Project.CurrentFile));
       sourceFile = ExtractFilePath(Active->Project.CurrentFile) + "EASyCF51s.tmp";
       tempFile = ExtractFilePath(Active->Project.CurrentFile) + "EASyCF51m.tmp";
@@ -861,4 +872,27 @@ void __fastcall TMain::Reload1Click(TObject *Sender)
 //---------------------------------------------------------------------------
 
 
-                                 
+
+void __fastcall TMain::mnuProgrammerOptionsClick(TObject *Sender)
+{
+  ProgConfig->Show();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMain::tbProgramClick(TObject *Sender)
+{
+  AnsiString command;
+  command = "\"C:\Program Files (x86)\\PEMicro\\PKGCFV1PROSTARTER\\cprogcfv1.exe\" ";
+//  command += "? ";  // keep programmer window open
+  command += "INTERFACE=usbmultilink PORT=USB1 ";
+  command += scriptfile;
+  int progstatus = system(command.c_str());
+  if (progstatus)
+  {
+    TMsgDlgButtons bt;
+    bt  << mbOK;
+    MessageDlg("Error while programming!",mtError, bt,0);
+  }
+}
+//---------------------------------------------------------------------------
+

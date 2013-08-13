@@ -15,6 +15,7 @@ USEFORM("optionsS.cpp", Options);
 USEFORM("editorOptions.cpp", EditorOptionsForm);
 USEFORM("findDialogS.cpp", findDialogFrm);
 USEFORM("replaceDialogS.cpp", replaceDialogFrm);
+USEFORM("ProgrammerConfig.cpp", ProgConfig);
 //---------------------------------------------------------------------------
 WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -23,14 +24,15 @@ WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                  Application->Initialize();
                  Application->Title = "EASyCF51";
                  Application->CreateForm(__classid(TMain), &Main);
-     Application->CreateForm(__classid(TAboutBox), &AboutBox);
-     Application->CreateForm(__classid(TAssemblerBox), &AssemblerBox);
-     Application->CreateForm(__classid(TChkSave), &ChkSave);
-     Application->CreateForm(__classid(TOptions), &Options);
-     Application->CreateForm(__classid(TEditorOptionsForm), &EditorOptionsForm);
-     Application->CreateForm(__classid(TfindDialogFrm), &findDialogFrm);
-     Application->CreateForm(__classid(TreplaceDialogFrm), &replaceDialogFrm);
-     Application->Run();
+                 Application->CreateForm(__classid(TAboutBox), &AboutBox);
+                 Application->CreateForm(__classid(TAssemblerBox), &AssemblerBox);
+                 Application->CreateForm(__classid(TChkSave), &ChkSave);
+                 Application->CreateForm(__classid(TOptions), &Options);
+                 Application->CreateForm(__classid(TEditorOptionsForm), &EditorOptionsForm);
+                 Application->CreateForm(__classid(TfindDialogFrm), &findDialogFrm);
+                 Application->CreateForm(__classid(TreplaceDialogFrm), &replaceDialogFrm);
+                 Application->CreateForm(__classid(TProgConfig), &ProgConfig);
+                 Application->Run();
         }
         catch (Exception &exception)
         {

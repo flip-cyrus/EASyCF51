@@ -115,6 +115,10 @@ __published:	// IDE-managed Components
         TToolButton *ToolButton7;
   TLabel *Label1;
   TLabel *Label2;
+        TToolButton *tbProgram;
+        TToolButton *ToolButton9;
+        TMenuItem *mnuProgrammerOptions;
+        TMenuItem *N8;
         void __fastcall mnuSaveAsClick(TObject *Sender);
         void __fastcall mnuExitClick(TObject *Sender);
         void __fastcall mnuOpenClick(TObject *Sender);
@@ -148,6 +152,8 @@ __published:	// IDE-managed Components
         void __fastcall EditUndoExecute(TObject *Sender);
         void __fastcall EditRedoExecute(TObject *Sender);
         void __fastcall Reload1Click(TObject *Sender);
+        void __fastcall mnuProgrammerOptionsClick(TObject *Sender);
+        void __fastcall tbProgramClick(TObject *Sender);
 private:	// User declarations
         void __fastcall WmDropFiles(TWMDropFiles& Message);     // handle drag-n-drop from explorer
 //        void __fastcall HandleVScroll(TMessage& msg);
