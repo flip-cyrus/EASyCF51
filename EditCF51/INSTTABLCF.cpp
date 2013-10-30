@@ -125,11 +125,11 @@ through a pointer in the flavor list for that flavor.
 
 flavor addfl[] = {
 	{ All, AnDirect, LONG_SIZE, arithReg, 0, 0, 0xD1C0 },             // ADDA <ea>,An
-	{ IMMEDIATE, DataAlt, LONG_SIZE, immedInst, 0x0600, 0x0640, 0x0680 }, // ADDI or ADDQ #d,<ea>
-     	{ IMMEDIATE, AnDirect, LONG_SIZE, quickMath, 0, 0x5040, 0x5080 },      // ADDQ #d,An
-	{ Data, DnDirect, LONG_SIZE, arithReg, 0xD000, 0xD040, 0xD080 },      // ADD <ea>,Dn
-	{ AnDirect, DnDirect, LONG_SIZE, arithReg, 0xD000, 0xD040, 0xD080 },   // ADD An,Dn
-	{ DnDirect, MemAlt, LONG_SIZE, arithAddr, 0xD100, 0xD140, 0xD180 },   // ADD Dn,<ea>
+	{ IMMEDIATE, DataAlt, LONG_SIZE, immedInst, 0x0680, 0x0680, 0x0680 }, // ADDI or ADDQ #d,<ea>
+     	{ IMMEDIATE, AnDirect, LONG_SIZE, quickMath, 0, 0x5080, 0x5080 },      // ADDQ #d,An
+	{ Data, DnDirect, LONG_SIZE, arithReg, 0xD080, 0xD080, 0xD080 },      // ADD <ea>,Dn
+	{ AnDirect, DnDirect, LONG_SIZE, arithReg, 0xD080, 0xD080, 0xD080 },   // ADD An,Dn
+	{ DnDirect, MemAlt, LONG_SIZE, arithAddr, 0xD180, 0xD180, 0xD180 },   // ADD Dn,<ea>
        };
 
 flavor addafl[] = {
@@ -137,36 +137,36 @@ flavor addafl[] = {
        };
 
 flavor addifl[] = {
-	{ IMMEDIATE, DnDirect, LONG_SIZE, immedInst, 0x0600, 0x0640, 0x0680 }
+	{ IMMEDIATE, DnDirect, LONG_SIZE, immedInst, 0x0680, 0x0680, 0x0680 }
        };
 
 flavor addqfl[] = {
-	{ IMMEDIATE, DataAlt, LONG_SIZE, quickMath, 0x5000, 0x5040, 0x5080 },
-	{ IMMEDIATE, AnDirect, LONG_SIZE, quickMath, 0, 0x5040, 0x5080 }
+	{ IMMEDIATE, DataAlt, LONG_SIZE, quickMath, 0x5080, 0x5080, 0x5080 },
+	{ IMMEDIATE, AnDirect, LONG_SIZE, quickMath, 0, 0x5080, 0x5080 }
        };
 
 flavor addxfl[] = {
-	{ DnDirect, DnDirect, LONG_SIZE, twoReg, 0xD100, 0xD140, 0xD180 }
+	{ DnDirect, DnDirect, LONG_SIZE, twoReg, 0xD180, 0xD180, 0xD180 }
        };
 
 flavor andfl[] = {
-	{ Data, DnDirect, LONG_SIZE, arithReg, 0xC000, 0xC040, 0xC080 },
-	{ DnDirect, MemAlt, LONG_SIZE, arithAddr, 0xC100, 0xC140, 0xC180 },
-	{ IMMEDIATE, DataAlt, LONG_SIZE, immedInst, 0x0200, 0x0240, 0x0280 }
+	{ Data, DnDirect, LONG_SIZE, arithReg, 0xC080, 0xC080, 0xC080 },
+	{ DnDirect, MemAlt, LONG_SIZE, arithAddr, 0xC180, 0xC180, 0xC180 },
+	{ IMMEDIATE, DataAlt, LONG_SIZE, immedInst, 0x0280, 0x0280, 0x0280 }
        };
 
 flavor andifl[] = {
-	{ IMMEDIATE, DnDirect, LONG_SIZE, immedInst, 0x0200, 0x0240, 0x0280 }
+	{ IMMEDIATE, DnDirect, LONG_SIZE, immedInst, 0x0280, 0x0280, 0x0280 }
        };
 
 flavor aslfl[] = {
-	{ DnDirect, DnDirect, LONG_SIZE, shiftReg, 0xE120, 0xE160, 0xE1A0 },
-	{ IMMEDIATE, DnDirect, LONG_SIZE, shiftReg, 0xE100, 0xE140, 0xE180 }
+	{ DnDirect, DnDirect, LONG_SIZE, shiftReg, 0xE1A0, 0xE1A0, 0xE1A0 },
+	{ IMMEDIATE, DnDirect, LONG_SIZE, shiftReg, 0xE180, 0xE180, 0xE180 }
        };
 
 flavor asrfl[] = {
-	{ DnDirect, DnDirect, LONG_SIZE, shiftReg, 0xE020, 0xE060, 0xE0A0 },
-	{ IMMEDIATE, DnDirect, LONG_SIZE, shiftReg, 0xE000, 0xE040, 0xE080 }
+	{ DnDirect, DnDirect, LONG_SIZE, shiftReg, 0xE0A0, 0xE0A0, 0xE0A0 },
+	{ IMMEDIATE, DnDirect, LONG_SIZE, shiftReg, 0xE080, 0xE080, 0xE080 }
        };
 
 flavor bccfl[] = {
@@ -176,14 +176,14 @@ flavor bccfl[] = {
 flavor bchgfl[] = {
 	{ DnDirect, MemAlt, BYTE_SIZE, arithAddr, 0x0140, 0x0140, 0 },
 	{ DnDirect, DnDirect, LONG_SIZE, arithAddr, 0, 0x0140, 0x0140 },
-	{ IMMEDIATE, MemAlt, BYTE_SIZE, staticBit, 0x0840, 0x0840, 0 },
+	{ IMMEDIATE, AddrIndirect, BYTE_SIZE, staticBit, 0x0840, 0x0840, 0 },
 	{ IMMEDIATE, DnDirect, LONG_SIZE, staticBit, 0, 0x0840, 0x0840 }
        };
 
 flavor bclrfl[] = {
 	{ DnDirect, MemAlt, BYTE_SIZE, arithAddr, 0x0180, 0x0180, 0 },
 	{ DnDirect, DnDirect, LONG_SIZE, arithAddr, 0, 0x0180, 0x0180 },
-	{ IMMEDIATE, MemAlt, BYTE_SIZE, staticBit, 0x0880, 0x0880, 0 },
+	{ IMMEDIATE, AddrIndirect, BYTE_SIZE, staticBit, 0x0880, 0x0880, 0 },
 	{ IMMEDIATE, DnDirect, LONG_SIZE, staticBit, 0, 0x0880, 0x0880 }
        };
 
@@ -250,7 +250,7 @@ flavor brafl[] = {
 flavor bsetfl[] = {
 	{ DnDirect, MemAlt, BYTE_SIZE, arithAddr, 0x01C0, 0x01C0, 0 },
 	{ DnDirect, DnDirect, LONG_SIZE, arithAddr, 0, 0x01C0, 0x01C0 },
-	{ IMMEDIATE, MemAlt, BYTE_SIZE, staticBit, 0x08C0, 0x08C0, 0 },
+	{ IMMEDIATE, AddrIndirect, BYTE_SIZE, staticBit, 0x08C0, 0x08C0, 0 },
 	{ IMMEDIATE, DnDirect, LONG_SIZE, staticBit, 0, 0x08C0, 0x08C0 }
        };
 
@@ -261,7 +261,7 @@ flavor bsrfl[] = {
 flavor btstfl[] = {
 	{ DnDirect, Memory, BYTE_SIZE, arithAddr, 0x0100, 0x0100, 0 },
 	{ DnDirect, DnDirect, LONG_SIZE, arithAddr, 0, 0x0100, 0x0100 },
-	{ IMMEDIATE, Memory, BYTE_SIZE, staticBit, 0x0800, 0x0800, 0 },
+	{ IMMEDIATE, AddrIndirect, BYTE_SIZE, staticBit, 0x0800, 0x0800, 0 },
 	{ IMMEDIATE, DnDirect, LONG_SIZE, staticBit, 0, 0x0800, 0x0800 }
        };
 
@@ -289,11 +289,11 @@ flavor cmpfl[] = {
        };
 
 flavor cmpafl[] = {
-	{ All, AnDirect, LONG_SIZE, arithReg, 0, 0xB0C0, 0xB1C0 }
+	{ All, AnDirect, WL, arithReg, 0, 0xB0C0, 0xB1C0 }
        };
 
 flavor cmpifl[] = {
-	{ IMMEDIATE, DnDirect, LONG_SIZE, immedInst, 0x0C00, 0x0C40, 0x0C80 }
+	{ IMMEDIATE, DnDirect, BWL, immedInst, 0x0C00, 0x0C40, 0x0C80 }
        };
 
 flavor divsfl[] = {
@@ -305,12 +305,12 @@ flavor divufl[] = {
        };
 
 flavor eorfl[] = {
-	{ DnDirect, DataAlt, LONG_SIZE, arithAddr, 0xB100, 0xB140, 0xB180 },
-	{ IMMEDIATE, DnDirect, LONG_SIZE, immedInst, 0x0A00, 0x0A40, 0x0A80 } //EORI
+	{ DnDirect, DataAlt, LONG_SIZE, arithAddr, 0xB180, 0xB180, 0xB180 },
+	{ IMMEDIATE, DnDirect, LONG_SIZE, immedInst, 0x0A80, 0x0A80, 0x0A80 } //EORI
        };
 
 flavor eorifl[] = {
-	{ IMMEDIATE, DnDirect, LONG_SIZE, immedInst, 0x0A00, 0x0A40, 0x0A80 }
+	{ IMMEDIATE, DnDirect, LONG_SIZE, immedInst, 0x0A80, 0x0A80, 0x0A80 }
        };
 
 flavor extfl[] = {
@@ -346,13 +346,13 @@ flavor linkfl[] = {
        };
 
 flavor lslfl[] = {
-	{ DnDirect, DnDirect, LONG_SIZE, shiftReg, 0xE128, 0xE168, 0xE1A8 },
-	{ IMMEDIATE, DnDirect, LONG_SIZE, shiftReg, 0xE108, 0xE148, 0xE188 }
+	{ DnDirect, DnDirect, LONG_SIZE, shiftReg, 0xE1A8, 0xE1A8, 0xE1A8 },
+	{ IMMEDIATE, DnDirect, LONG_SIZE, shiftReg, 0xE188, 0xE188, 0xE188 }
        };
 
 flavor lsrfl[] = {
-	{ DnDirect, DnDirect, LONG_SIZE, shiftReg, 0xE028, 0xE068, 0xE0A8 },
-	{ IMMEDIATE, DnDirect, LONG_SIZE, shiftReg, 0xE008, 0xE048, 0xE088 }
+	{ DnDirect, DnDirect, LONG_SIZE, shiftReg, 0xE0A8, 0xE0A8, 0xE0A8 },
+	{ IMMEDIATE, DnDirect, LONG_SIZE, shiftReg, 0xE088, 0xE088, 0xE088 }
        };
 
 flavor mov3qfl[] = {
@@ -399,11 +399,11 @@ flavor mvzfl[] = {
        };
 
 flavor negfl[] = {
-	{ DnDirect, 0, LONG_SIZE, oneOp, 0x4400, 0x4440, 0x4480 }
+	{ DnDirect, 0, LONG_SIZE, oneOp, 0x4480, 0x4480, 0x4480 }
        };
 
 flavor negxfl[] = {
-	{ DnDirect, 0, LONG_SIZE, oneOp, 0x4000, 0x4040, 0x4080 }
+	{ DnDirect, 0, LONG_SIZE, oneOp, 0x4080, 0x4080, 0x4080 }
        };
 
 flavor nopfl[] = {
@@ -411,13 +411,13 @@ flavor nopfl[] = {
        };
 
 flavor notfl[] = {
-	{ DnDirect, 0, LONG_SIZE, oneOp, 0x4600, 0x4640, 0x4680 }
+	{ DnDirect, 0, LONG_SIZE, oneOp, 0x4680, 0x4680, 0x4680 }
        };
 
 flavor orfl[] = {
-	{ Data, DnDirect, LONG_SIZE, arithReg, 0, 0x8040, 0x8080 },
-	{ DnDirect, MemAlt, LONG_SIZE, arithAddr, 0, 0x8140, 0x8180 },
-	{ IMMEDIATE, DnDirect, LONG_SIZE, immedInst, 0, 0x0040, 0x0080 } //ORI
+	{ Data, DnDirect, LONG_SIZE, arithReg, 0, 0x8080, 0x8080 },
+	{ DnDirect, MemAlt, LONG_SIZE, arithAddr, 0, 0x8180, 0x8180 },
+	{ IMMEDIATE, DnDirect, LONG_SIZE, immedInst, 0, 0x0080, 0x0080 } //ORI
        };
 
 flavor orifl[] = {
@@ -521,29 +521,29 @@ flavor stopfl[] = {
        };
 
 flavor subfl[] = {
-	{ All, AnDirect, LONG_SIZE, arithReg, 0, 0, 0x91C0 },                // changed order to match addfl CK 5/22/07
-	{ IMMEDIATE, DataAlt, LONG_SIZE, immedInst, 0, 0, 0x0480 },
-	{ IMMEDIATE, AnDirect, LONG_SIZE, quickMath, 0, 0, 0x5180 },
-	{ Data, DnDirect, LONG_SIZE, arithReg, 0, 0, 0x9080 },
-	{ AnDirect, DnDirect, LONG_SIZE, arithReg, 0, 0, 0x9080 },
-	{ DnDirect, MemAlt, LONG_SIZE, arithAddr, 0, 0, 0x9180 },
+	{ All, AnDirect, LONG_SIZE, arithReg, 0, 0x91C0, 0x91C0 },                // changed order to match addfl CK 5/22/07
+	{ IMMEDIATE, DataAlt, LONG_SIZE, immedInst, 0, 0x0480, 0x0480 },
+	{ IMMEDIATE, AnDirect, LONG_SIZE, quickMath, 0, 0x5180, 0x5180 },
+	{ Data, DnDirect, LONG_SIZE, arithReg, 0, 0x9080, 0x9080 },
+	{ AnDirect, DnDirect, LONG_SIZE, arithReg, 0, 0x9080, 0x9080 },
+	{ DnDirect, MemAlt, LONG_SIZE, arithAddr, 0, 0x9180, 0x9180 },
        };
 
 flavor subafl[] = {
-	{ All, AnDirect, LONG_SIZE, arithReg, 0, 0, 0x91C0 }
+	{ All, AnDirect, LONG_SIZE, arithReg, 0, 0x91C0, 0x91C0 }
        };
 
 flavor subifl[] = {
-	{ IMMEDIATE, DnDirect, LONG_SIZE, immedInst, 0, 0, 0x0480 }
+	{ IMMEDIATE, DnDirect, LONG_SIZE, immedInst, 0, 0x0480, 0x0480 }
        };
 
 flavor subqfl[] = {
-	{ IMMEDIATE, DataAlt, LONG_SIZE, quickMath, 0, 0, 0x5180 },
-	{ IMMEDIATE, AnDirect, LONG_SIZE, quickMath, 0, 0, 0x5180 }
+	{ IMMEDIATE, DataAlt, LONG_SIZE, quickMath, 0, 0x5180, 0x5180 },
+	{ IMMEDIATE, AnDirect, LONG_SIZE, quickMath, 0, 0x5180, 0x5180 }
        };
 
 flavor subxfl[] = {
-	{ DnDirect, DnDirect, LONG_SIZE, twoReg, 0x9100, 0x9140, 0x9180 }
+	{ DnDirect, DnDirect, LONG_SIZE, twoReg, 0x9180, 0x9180, 0x9180 }
        };
 
 flavor svcfl[] = {

@@ -165,7 +165,8 @@ int extWords(opDescriptor *op, int size, int *errorPtr)
   else if (op->mode == AbsShort) {
     if (pass2) {
       output(op->data & 0xFFFF, WORD_SIZE);
-      if (op->data < -32768 || op->data > 32767)
+//      if (op->data < -32768 || op->data > 32767)
+      if (op->data & 0xFFFF0000)
 	NEWERROR(*errorPtr, INV_ABS_ADDRESS);
     }
     loc += 2;
