@@ -719,6 +719,7 @@ int mov3q(int mask, int size,
       NEWERROR(*errorPtr, INV_MOVE_QUICK_CONST);
   }
   loc += 2;
+  extWords(dest, size, errorPtr);
 
   return NORMAL;
 }

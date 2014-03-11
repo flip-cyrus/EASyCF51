@@ -262,9 +262,9 @@ object Main: TMain
     end
   end
   object OpenDialog: TOpenDialog
-    DefaultExt = '*.X68'
+    DefaultExt = '*.asm'
     Filter = 
-      'EASy68K Source  [.X68]|*.X68|68K Source  [.ASM] [.M68]|*.ASM;*.M' +
+      '68K Source  [.ASM] [.M68]|*.ASM;*.M68|EASy68K Source  [.X68]|*.X' +
       '68|EASy68K Listing  [.L68]|*.L68|68K S Record  [.S68]|*.S68|Any ' +
       'File  [*.*]|*.*'
     Left = 128

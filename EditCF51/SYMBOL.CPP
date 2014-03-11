@@ -209,6 +209,41 @@ int optCRE()
   return NORMAL;
 }
 
+//----------------------------------------------
+// Write the symbol table to the listing file
+int forthSymbolExport()
+{
+  symbolDef *s;         //, *last;
+  int bytes;
+  FILE* forthExportFile;
+
+  forthExportFile = fopen("asm_variables.f", "w");
+    if (!forthExportFile) {
+      sprintf(buffer,"Unable to create forth export file");
+      Application->MessageBox(buffer, "Error", MB_OK);
+      return MILD_ERROR;
+    }
+
+  fprintf(forthExportFile, "cr .( asm_variables.f) decimal\n");
+
+  for (int i=0; i<=MAXHASH; i++) {      // for all values of hash()
+    s = htable[i];
+    if (s) {
+      //last = NULL;
+      while (s) {               // while symbols remain in the list
+        if ((s->flags & DS_SYM) == DS_SYM)
+        {
+          fprintf(forthExportFile, "$%x\tconstant\t%s\n",s->value,s->name);
+        }
+        s = s->next;
+      }
+    }
+  }
+  fclose(forthExportFile);
+
+  return NORMAL;
+}
+
 //---------------------------------------------------------------------
 // Return index for array of pointers to linked lists
 // Returns 0 to MAXHASH inclusive based on first character of symbol.

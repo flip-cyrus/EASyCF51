@@ -518,6 +518,7 @@ int ds(int size, char *label, char *op, int *errorPtr)
 {
   int	blockSize;
   bool	backRef;
+  symbolDef* symbol;
 
   if (size == SHORT_SIZE) {
     NEWERROR(*errorPtr, INV_SIZE_CODE);
@@ -535,7 +536,10 @@ int ds(int size, char *label, char *op, int *errorPtr)
 
   // Define the label attached to this directive, if any
   if (*label)
-    define(label, loc, pass2, true, errorPtr);
+  {
+    symbol = define(label, loc, pass2, true, errorPtr);
+    symbol->flags = symbol->flags | DS_SYM;
+  }
   // Evaluate the size of the block (in bytes, words, or longwords)
   op = eval(op, &blockSize, &backRef, errorPtr);
   if (*errorPtr < SEVERE && !backRef) {

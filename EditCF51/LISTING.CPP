@@ -267,6 +267,9 @@ int finishList()
     if (CREflag)
       optCRE();   // Write symbol table to listing file
 
+    // write exported symbols for forth
+    forthSymbolExport();
+
     // write starting address to first line of file
     rewind(listFile);                     // rewind to start of file
     fprintf(listFile, "%08lX", startAddress);

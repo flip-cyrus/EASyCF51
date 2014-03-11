@@ -173,6 +173,8 @@ int     tokenize(char* , char*, char*[], char*);  //ck
 
 int     optCRE();                               //ck
 
+int     forthSymbolExport();                    //klan
+
 char	*evalList(char *, unsigned short *, int *);
 
 int	initObj(char *);

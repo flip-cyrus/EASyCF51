@@ -182,7 +182,7 @@ int assembleFile(char fileName[], char tempName[], AnsiString workName)
 
     // if Object file flag then create .S68 file (S-Record)
     if (objFlag) {
-      outName = ChangeFileExt(workName, ".S68");
+      outName = ChangeFileExt(workName, ".S19");
       if(initObj(outName.c_str()) != NORMAL)     // if error initializing object file
         objFlag = false;                        // disable object file creation
     }
