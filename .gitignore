@@ -11,4 +11,6 @@ settings.dat
 *.chm
 *.dsk
 untitled*
+# Software handbook Template
+Software_Handbuch.odt
 
