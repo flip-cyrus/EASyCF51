@@ -713,15 +713,15 @@ void __fastcall TMain::FormShow(TObject *Sender)
     }
     else
       mnuNewClick(Sender);      // open new edit window
+    Main->Caption = TITLE;
+    if (maximizedEdit) {
+      TTextStuff *Active = (TTextStuff*)Main->ActiveMDIChild;
+      Active->WindowState = wsMaximized;
+    }
   }
-   else
-     mnuNewClick(Sender);        // open new edit window
-
-  Main->Caption = TITLE;
-  if (maximizedEdit) {
-    TTextStuff *Active = (TTextStuff*)Main->ActiveMDIChild;
-    Active->WindowState = wsMaximized;
-  }
+  // Open new file on startup
+//   else
+//     mnuNewClick(Sender);        // open new edit window
 
 }
 //---------------------------------------------------------------------------
